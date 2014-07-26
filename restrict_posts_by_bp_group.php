@@ -97,7 +97,7 @@ if( ! class_exists( 'RPBG' ) ) {
                                                 )
                                             ));
             }else{
-                if( ! is_admin() ) {
+                if( ! is_super_admin() && ! is_admin() ) {
                     $query->set( 'post__not_in', $this->restricted_posts_IDs );
                 }
                 
