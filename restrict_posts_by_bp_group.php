@@ -3,7 +3,7 @@
 Plugin Name: Restrict Posts By Buddypress Group
 Plugin URI: http://bappi-d-great.com
 Description: Restrict your posts based on BuddyPress groups
-Version: 1.0.1
+Version: 1.0.2
 Author: Bappi D Great
 Author URI: http://bappi-d-great.com
 License: GPLv2 or later
@@ -83,8 +83,12 @@ if( ! class_exists( 'RPBG' ) ) {
 		return;
             }
             
-            $grp = implode( ',', $_POST['bp_res_grp_post'] );
-            update_post_meta( $post_id, '_rpbg_meta_value_key', $grp );
+            if( count( $_POST['bp_res_grp_post'] ) < 1 ){
+            	$grp = implode( ',', $_POST['bp_res_grp_post'] );
+            	update_post_meta( $post_id, '_rpbg_meta_value_key', $grp );
+            }else{
+            	delete_post_meta( $post_id, '_rpbg_meta_value_key' );
+            }
             
         }
         
